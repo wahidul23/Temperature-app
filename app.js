@@ -5,8 +5,13 @@ const getWeatherData = city =>{
   fetch(url)
   .then(response => response.json())
   .then(data => {
-      console.log(data);
-      updateUI(data);
+    //   console.log(data);
+    //   updateUI(data);
+    document.getElementById('cityName').innerText = data.name || "unknown location";
+    document.getElementById('temperature').innerText = (data.main.temp - 273).toFixed(2);
+    document.getElementById('weatherStatus').innerText = data.weather[0].main ;
+    document.getElementById('weatherIcon').setAttribute('src',`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
+    document.getElementById('cityName').value = "";
   })
 }
 const searchBtn = document.getElementById('searchBtn');
@@ -16,11 +21,11 @@ searchBtn.addEventListener('click',() => {
     getWeatherData(inputCity);
 })
 
-const updateUI = data => {
-    document.getElementById('cityName').innerText = data.name || "unknown location";
-    document.getElementById('temperature').innerText = (data.main.temp - 273).toFixed(2);
-    document.getElementById('weatherStatus').innerText = data.weather[0].main ;
-    document.getElementById('weatherIcon').setAttribute('src',`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
-    document.getElementById('cityName').value = "";
-}
+// const updateUI = data => {
+//     document.getElementById('cityName').innerText = data.name || "unknown location";
+//     document.getElementById('temperature').innerText = (data.main.temp - 273).toFixed(2);
+//     document.getElementById('weatherStatus').innerText = data.weather[0].main ;
+//     document.getElementById('weatherIcon').setAttribute('src',`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
+//     document.getElementById('cityName').value = "";
+// }
 //getWeatherData('Dhaka');
